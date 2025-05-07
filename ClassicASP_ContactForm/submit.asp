@@ -32,6 +32,6 @@ conn.Close
 Set cmd = Nothing
 Set conn = Nothing
 
-Response.Write("Message submitted successfully.")
+Response.Redirect "list.asp"
 %>
 

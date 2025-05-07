@@ -13,18 +13,23 @@
 
     <title>Classic ASP Contact Form</title>
 </head>
-<body class="container mt-5">
+<body class="container mt-5" style="background-color:grey">
 
-<ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist" style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
+<ul class="nav nav-pills nav-fill gap-2 p-1 small bg-dark rounded-5 shadow-sm" id="pillNav2" role="tablist"
+  style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-dark); --bs-nav-pills-link-active-bg: var(--bs-white);">
+  
   <li class="nav-item" role="presentation">
-    <button class="nav-link rounded-5" id="home-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Home</button>
+    <a class="nav-link rounded-5" href="" role="tab">Home</a>
   </li>
+  
   <li class="nav-item" role="presentation">
-    <button class="nav-link rounded-5" id="profile-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Profile</button>
+    <a class="nav-link  rounded-5" href="list.asp" role="tab">Message List</a>
   </li>
+  
   <li class="nav-item" role="presentation">
-    <button class="nav-link active rounded-5" id="contact-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">Contact</button>
+    <a class="nav-link active rounded-5" href="default.asp" role="tab">Contact</a>
   </li>
+  
 </ul>
 
 
@@ -43,7 +48,7 @@
             <label class="form-label">Message:</label>
             <textarea class="form-control" name="message" rows="5" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-success">Submit</button>
     </form>
 </body>
 </html>
