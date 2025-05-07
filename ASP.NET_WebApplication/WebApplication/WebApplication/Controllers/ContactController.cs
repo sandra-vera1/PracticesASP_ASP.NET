@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -14,9 +15,27 @@ namespace WebApplication.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Contact
-        public ActionResult Index()
+        public ActionResult Index(string search, int page = 1)
         {
-            return View();
+            int pageSize = 10;
+            var query = db.ContactMessages.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                query = query.Where(m => m.Name.Contains(search) || m.Email.Contains(search) || m.Message.Contains(search));
+            }
+
+            var messages = query
+                            .OrderByDescending(m => m.DateMessage)
+                            .Skip((page - 1) * pageSize)
+                            .Take(pageSize)
+                            .ToList();
+
+            int totalMessages = query.Count();
+            ViewBag.TotalPages = (int)Math.Ceiling((double)totalMessages / pageSize);
+            ViewBag.CurrentPage = page;
+            ViewBag.Search = search;
+            return View(messages);
         }
 
         // GET: Contact/Details/5
@@ -90,17 +109,34 @@ public ActionResult Edit(int id)
         // GET: Contact/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+
+            var contact = db.ContactMessages.Find(id);
+            if (contact == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(contact);
         }
 
         // POST: Contact/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
             try
             {
-                // TODO: Add delete logic here
 
+                var contact = db.ContactMessages.Find(id);
+                if (contact != null)
+                {
+                    db.ContactMessages.Remove(contact);
+                    db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
             catch
