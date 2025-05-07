@@ -58,6 +58,9 @@ Set rs = conn.Execute(sql)
                 <td><%= Server.HTMLEncode(rs("Email")) %></td>
                 <td><%= Server.HTMLEncode(rs("Message")) %></td>
                 <td><%= rs("DateMessage") %></td>
+				<td>
+                    <a href="delete.asp?id=<%= rs("Id") %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
             </tr>
             <%
                 rs.MoveNext
