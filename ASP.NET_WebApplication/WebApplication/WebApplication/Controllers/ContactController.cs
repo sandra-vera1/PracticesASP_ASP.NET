@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Reflection;
@@ -84,21 +85,30 @@ namespace WebApplication.Controllers
         }
 
 
-// GET: Contact/Edit/5
-public ActionResult Edit(int id)
+        // GET: Contact/Edit/5
+        public ActionResult Edit(int id)
         {
-            return View();
+            var message = db.ContactMessages.Find(id);
+            if (message == null)
+            {
+                return HttpNotFound();
+            }
+            return View(message);
         }
 
         // POST: Contact/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(ContactMessage model)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(model).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(model);
             }
             catch
             {

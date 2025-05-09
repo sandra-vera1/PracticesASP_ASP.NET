@@ -46,6 +46,7 @@ Set rs = conn.Execute(sql)
                 <th>Email</th>
                 <th>Message</th>
                 <th>Date</th>
+				<th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -60,6 +61,7 @@ Set rs = conn.Execute(sql)
                 <td><%= rs("DateMessage") %></td>
 				<td>
                     <a href="delete.asp?id=<%= rs("Id") %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+					<a href="edit_page.asp?id=<%= rs("Id") %>" class="btn btn-success btn-sm" >Update</a>
                 </td>
             </tr>
             <%
