@@ -71,4 +71,37 @@
 
 
 
+<div style="display: flex; justify-content: center; align-items: center; height: 50vh;">
+    <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    fetch('/Contact/Contact/ChartData')
+        .then(res => res.json())
+        .then(data => {
+            debugger;
+            const labels = data.map(item => item.Date);
+            const counts = data.map(item => item.Count);
+
+            new Chart(document.getElementById('myChart'), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Messages per Day',
+                        data: counts,
+                        backgroundColor: 'rgba(119, 86, 82, 0.6)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        });
+</script>
+
+
 

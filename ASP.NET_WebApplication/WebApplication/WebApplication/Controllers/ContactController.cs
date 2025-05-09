@@ -154,5 +154,18 @@ namespace WebApplication.Controllers
                 return View();
             }
         }
+
+        public JsonResult ChartData()
+        {
+            var data = db.ContactMessages
+                .GroupBy(m => DbFunctions.TruncateTime(m.DateMessage))
+                .Select(g => new
+                {
+                    Date = g.Key.Value,
+                    Count = g.Count()
+                }).ToList();
+            return Json(data.Select(c => new { Date = c.Date.ToString("yyyy-MM-dd"), Count = c.Count }).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

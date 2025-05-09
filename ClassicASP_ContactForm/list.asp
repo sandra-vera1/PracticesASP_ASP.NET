@@ -21,7 +21,7 @@ Set rs = conn.Execute(sql)
   style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-dark); --bs-nav-pills-link-active-bg: var(--bs-white);">
   
   <li class="nav-item" role="presentation">
-    <a class="nav-link rounded-5" href="" role="tab">Home</a>
+    <a class="nav-link rounded-5" href="chart.asp" role="tab">Chart</a>
   </li>
   
   <li class="nav-item" role="presentation">
