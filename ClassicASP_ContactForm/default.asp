@@ -23,7 +23,7 @@
   </li>
   
   <li class="nav-item" role="presentation">
-    <a class="nav-link  rounded-5" href="list.asp" role="tab">Message List</a>
+    <a class="nav-link  rounded-5" href="list.asp" role="tab">Messages List</a>
   </li>
   
   <li class="nav-item" role="presentation">
@@ -48,7 +48,9 @@
             <label class="form-label">Message:</label>
             <textarea class="form-control" name="message" rows="5" required></textarea>
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
+		<div class="text-center mt-3">
+		<button type="submit" class="btn btn-success">Submit</button>
+		</div>
     </form>
 </body>
 </html>

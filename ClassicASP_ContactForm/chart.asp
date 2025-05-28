@@ -34,7 +34,7 @@ conn.Close
   </li>
   
   <li class="nav-item" role="presentation">
-    <a class="nav-link  rounded-5" href="list.asp" role="tab">Message List</a>
+    <a class="nav-link  rounded-5" href="list.asp" role="tab">Messages List</a>
   </li>
   
   <li class="nav-item" role="presentation">

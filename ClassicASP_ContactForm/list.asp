@@ -40,7 +40,7 @@ Set rs = conn.Execute(sql)
   </li>
   
   <li class="nav-item" role="presentation">
-    <a class="nav-link active rounded-5" href="list.asp" role="tab">Message List</a>
+    <a class="nav-link active rounded-5" href="list.asp" role="tab">Messages List</a>
   </li>
   
   <li class="nav-item" role="presentation">
