@@ -1,10 +1,25 @@
 <!--#include file="ACN.asp"-->
 <%
-' Set DB connection
-Dim  rs, sql
+Const recordsPerPage = 8
+Dim  rs, sql, currentPage, totalRecords, totalPages, offset
 
-' Query data
-sql = "SELECT * FROM ContactMessages ORDER BY ID DESC"
+currentPage = Request.QueryString("page")
+If IsNumeric(currentPage) Then
+    currentPage = CInt(currentPage)
+    If currentPage < 1 Then currentPage = 1
+Else
+    currentPage = 1
+End If
+
+' Get total records
+Set rs = conn.Execute("SELECT COUNT(*) FROM ContactMessages")
+totalRecords = rs(0)
+rs.Close
+
+totalPages = Int((totalRecords + recordsPerPage - 1) / recordsPerPage)
+offset = (currentPage - 1) * recordsPerPage
+
+sql = "SELECT * FROM ContactMessages ORDER BY DateMessage OFFSET " & offset & " ROWS FETCH NEXT " & recordsPerPage & " ROWS ONLY"
 Set rs = conn.Execute(sql)
 %>
 
@@ -36,12 +51,11 @@ Set rs = conn.Execute(sql)
 
 
 
-    <br>
-    <h2>Contact Messages</h2>
+<br>
+<h2 class="text-center mt-3">Contact Messages List</h2>
     <table class="table table-bordered table-striped">
         <thead class="table-secondary">
             <tr>
-                <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Message</th>
@@ -54,7 +68,7 @@ Set rs = conn.Execute(sql)
             Do While Not rs.EOF
             %>
             <tr>
-                <td><%= rs("Id") %></td>
+               
                 <td><%= Server.HTMLEncode(rs("Name")) %></td>
                 <td><%= Server.HTMLEncode(rs("Email")) %></td>
                 <td><%= Server.HTMLEncode(rs("Message")) %></td>
@@ -74,5 +88,17 @@ Set rs = conn.Execute(sql)
             %>
         </tbody>
     </table>
+	<div class="text-center mt-3">
+		<%
+		Dim i
+		For i = 1 To totalPages
+		  If i = currentPage Then
+			Response.Write "<strong>" & i & "</strong> "
+		  Else
+			Response.Write "<a href='list.asp?page=" & i & "'>" & i & "</a> "
+		  End If
+		Next
+		%>
+	</div>
 </body>
 </html>
