@@ -13,7 +13,7 @@
 
     <title>Classic ASP Contact Form</title>
 </head>
-<body class="container mt-5" style="background-color:grey">
+<body class="container mt-5" style="background-color:#D7D2CB">
 
 <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-dark rounded-5 shadow-sm" id="pillNav2" role="tablist"
   style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-dark); --bs-nav-pills-link-active-bg: var(--bs-white);">
